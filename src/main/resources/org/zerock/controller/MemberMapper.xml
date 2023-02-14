@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.controller.dao.MemberDAO">
+
+	<select id="list" resultType="org.zerock.controller.dto.MemberDTO">
+		select * from membertest order by id asc
+	</select>
+	
+	<insert id="insert">
+		insert into membertest (id, pwd, name, email)
+			values (#{id}, #{pwd}, #{name}, #{email})
+	</insert>
+	
+	<select id="detail" resultType="org.zerock.controller.dto.MemberDTO">
+		select * from membertest where id = #{id}
+	</select>
+	
+	<delete id="delete">
+		delete from membertest where id = #{id}
+	</delete>
+	
+	<update id="update">
+		update membertest
+			set name = #{name}, pwd = #{pwd}, email = #{email}
+			where id = #{id}
+	</update>
+	
+	<select id="check_pwd" resultType="int">
+		select count(*) from membertest
+			where id = #{id} and pwd = #{pwd}
+	</select>
+
+	<select id="loginCheck" resultType="org.zerock.controller.dto.MemberDTO">
+		select * from membertest
+			where id = #{id} and pwd = #{pwd}
+	</select>
+	
+</mapper>
